@@ -23,7 +23,7 @@ def read_path_from_csv(filename):
 # Set up the turtle screen
 screen = turtle.Screen()
 screen.title("Path Visualization")
-screen.setup(width=800, height=600)
+screen.setup(width=1600, height=1200)
 
 # Create turtles for each path
 raw_path_turtle = turtle.Turtle()
@@ -32,8 +32,8 @@ live_path_turtle = turtle.Turtle()
 
 # Adjust turtle settings
 raw_path_turtle.speed(2)
-processed_path_turtle.speed(2)
-live_path_turtle.speed(2)
+processed_path_turtle.speed(9)
+live_path_turtle.speed(9)
 
 # Read paths from CSV files
 raw_path = read_path_from_csv('random_path.csv')
@@ -53,6 +53,21 @@ draw_path(live_blind_location, 'red')
 raw_path_turtle.hideturtle()
 processed_path_turtle.hideturtle()
 live_path_turtle.hideturtle()
+
+# Zoom in
+screen.setworldcoordinates(-10, -10, 10, 10)  # Adjust the coordinates as needed
+
+# Move along the pointer on the path
+path_index = 0
+
+def move_along_path():
+    global path_index
+    if path_index < len(live_blind_location):
+        turtle.ontimer(move_along_path, 100)  # Update every 100 milliseconds
+        turtle.goto(live_blind_location[path_index])
+        path_index += 1
+
+move_along_path()
 
 # Exit on click
 turtle.exitonclick()

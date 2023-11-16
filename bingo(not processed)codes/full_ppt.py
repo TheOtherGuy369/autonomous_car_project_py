@@ -77,7 +77,15 @@ def plot_path(path, label):
     plt.plot(x, y, label=label)
 
 # Example usage
-raw_path = [(0, 0), (1, 1), (2, 2), (3, 1), (4, 0)]
+raw_path = []
+
+with open('random_path.csv', 'r') as csvfile:
+    reader = csv.reader(csvfile)
+    next(reader)  # Skip header row
+    for row in reader:
+        x, y = map(float, row)
+        raw_path.append((x, y))
+
 car_width = 0.5  # 50 cm
 motor_rpm = 1500
 wheel_periphery = 4
