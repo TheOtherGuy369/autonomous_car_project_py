@@ -42,3 +42,4 @@ error_path = add_error_to_path(raw_path, error_percentage)
 save_path_to_csv(error_path, 'live_blind_location.csv')
 
 print("Error path:", error_path)
+print("test")
